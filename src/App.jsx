@@ -2,16 +2,29 @@ import { useState } from "react";
 import Header from "./assets/components/Header";
 
 function App() {
-  const nomi = ["nome 1", "nome 2"];
-  const [titles, setTitles] = useState(["titolo 1", "titolo 2", "titolo 3"]);
-  const [formValue, setFormValue] = useState("");
+  const [titles, setTitles] = useState(["Titolo 1", "Titolo 2", "Titolo 3"]);
+  const [inputValue, setInputValue] = useState("");
+  let newTitles = [...titles];
+  // - Funzione per eliminare un post
+  const deleteTitle = (element) => {
+    const index = newTitles.indexOf(element);
+    console.log(index);
+
+    if (index > -1) {
+      console.log(`Eliminato il titolo: "${newTitles[index]}"`);
+
+      newTitles.splice(index, 1);
+      setTitles(newTitles);
+    }
+  };
   const handleInputChange = (e) => {
-    setFormValue(e.target.value);
+    setInputValue(e.target.value);
   };
   const handleFormSubmit = (e) => {
     event.preventDefault();
-    console.log("Form inviato");
-    setTitles("Ciao");
+    console.log("Aggiunto il titolo: " + inputValue);
+    newTitles = [...titles, inputValue];
+    setTitles(newTitles);
   };
   return (
     <>
@@ -22,17 +35,37 @@ function App() {
             onChange={handleInputChange}
             type="text"
             className="form-control"
-            value={formValue}
+            value={inputValue}
             placeholder="Aggiungi il titolo di un post"
           />
           <button className="btn btn-outline-secondary">Aggiungi</button>
         </form>
         <hr />
-        <section>
-          {nomi.map((element) => {
-            <p>{element}</p>;
+        <ul>
+          {titles.map((element) => {
+            return (
+              <li
+                className="fw-bold d-flex justify-content-end mb-3"
+                key={element}
+              >
+                <p className="flex-grow-1">{element}</p>
+                <section>
+                  {/* <button className="btn btn-primary  me-3 ">
+                    <i className=" fa-solid fa-pen"></i>
+                  </button> */}
+                  <button
+                    className="btn btn-primary  "
+                    onClick={() => deleteTitle(element)}
+                  >
+                    <i className=" fa-solid fa-trash"></i>
+                  </button>
+                </section>
+
+                <hr />
+              </li>
+            );
           })}
-        </section>
+        </ul>
       </div>
     </>
   );
