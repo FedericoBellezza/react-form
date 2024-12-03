@@ -2,7 +2,23 @@ import { useState } from "react";
 import Header from "./assets/components/Header";
 
 function App() {
-  const [titles, setTitles] = useState(["Titolo 1", "Titolo 2", "Titolo 3"]);
+  const [titles, setTitles] = useState([
+    "Inception",
+    "The Dark Knight",
+    "Titanic",
+    "Avatar",
+    "The Godfather",
+    "Forrest Gump",
+    "Pulp Fiction",
+    "The Shawshank Redemption",
+    "The Matrix",
+    "Gladiator",
+    "The Lion King",
+    "The Lord of the Rings: The Fellowship of the Ring",
+    "Star Wars: A New Hope",
+    "Interstellar",
+    "The Avengers",
+  ]);
   const [inputValue, setInputValue] = useState("");
   let newTitles = [...titles];
   // - Funzione per eliminare un post
